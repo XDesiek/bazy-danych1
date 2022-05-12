@@ -10,6 +10,9 @@ try:
     records = cursor.fetchall()
     for record in records:
         print(record)
+        delete_query = """Delete from mobile where id = 1"""
+    cursor.execute(delete_query)
+    connection.commit()
 except (Exception, psycopg2.Error) as error:
     print("Error while connecting to PostgreSQL", error)
 finally:
@@ -18,7 +21,5 @@ finally:
         connection.close()
         print("PostgreSQL connection is closed")
 
-delete_query = """Delete from mobile where id = 1"""
-    cursor.execute(delete_query)
-    connection.commit()
+
     
