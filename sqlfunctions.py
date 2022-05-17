@@ -1,4 +1,9 @@
 
+def mainprint(  cursor):
+    records = cursor.fetchall()
+    for record in records:  
+        print(record)
+    print('\n')
 
 def add (table: str, name: str, last_name: str) -> str:
     text = f"""
