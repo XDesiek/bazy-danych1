@@ -1,0 +1,8 @@
+CREATE TABLE car(
+    car_id serial PRIMARY KEY,
+	mark VARCHAR ( 20 )NOT NULL,
+    model VARCHAR ( 20 )NOT NULL,
+    color VARCHAR ( 20 )NOT NULL,
+    horsepower INT      NOT NULL,
+    car_year TIMESTAMP NOT NULL,
+    working BOOLEAN NOT NULL,

@@ -1,5 +1,5 @@
 import psycopg2
-
+from sqlfunctions import add,delete,edit
 
 def mainprint():
     records = cursor.fetchall()
@@ -7,8 +7,8 @@ def mainprint():
         print(record)
     print('\n')
 
-databs='dvdrental'
-table="actor"
+databs='Firma'
+table="worker"
 action=input ('what do want to do?\nshowall\nadd\ndelete\nedit\nnothing\n')
 
 
@@ -26,19 +26,19 @@ try:
         elif action=='add':
             name=input('name?\n')
             last_name=input('last name?\n')
-            cursor.execute(f"INSERT INTO {table}(First_Name, Last_Name) VALUES ('{name}', '{last_name}') returning (First_Name, Last_Name);")
+            print(last_name)
+            cursor.execute(add(table,name,last_name))
             connection.commit()
             mainprint()
         elif action=='delete':
-            dlast_name=input('last name to delete?\n')
-            cursor.execute(f"DELETE FROM {table} WHERE last_name ='{dlast_name}' returning*;")
+            did=input('id to delete?\n')
+            cursor.execute(delete(table,did))
             connection.commit()
         elif action=='edit':
-            edname=input('name?\n')
-            edlast_name=input('last name?\n')
-            ename=input('edited name?\n')
-            elast_name=input('edited last name?\n')
-            cursor.execute(f"UPDATE {table} SET first_name = ename,last_name = 'elast_name' WHERE first_name='{edname}',last_name ='{edlast_name}' returning *;")
+            edid=input("Who do you want to edit ( what id )\n")
+            edname=input('edited name?\n')
+            edlast_name=input('edited last name?\n')
+            cursor.execute(edit(table, edname, edlast_name,edid))
             connection.commit()
             mainprint()
 except (Exception, psycopg2.Error) as error:

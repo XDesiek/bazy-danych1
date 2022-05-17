@@ -1,4 +1,5 @@
 import psycopg2
+from sqlfunctions import insert
 try:
     connection = psycopg2.connect(user="postgres",
                                     password="123",
